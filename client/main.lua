@@ -171,6 +171,9 @@ local function StartProgress(action, onStart, onTick, onFinish)
                     wasCancelled = true
                     break
                 end
+                if wasCancelled == true then
+                    break
+                end
             end
             if onFinish then onFinish(wasCancelled) end
             inprogress = false
@@ -268,6 +271,15 @@ local function isDoingSomething()
     return inprogress
 end
 exports('isDoingSomething', isDoingSomething)
+
+local function CancelProgress()
+    TriggerEvent('progressbar:client:cancel')
+    SendNUIMessage({
+        action = "stopAction"
+    })
+    wasCancelled = true
+end
+exports('CancelProgress', CancelProgress)
 
 RegisterCommand("isdoingsomething", function()
     local animation = {
