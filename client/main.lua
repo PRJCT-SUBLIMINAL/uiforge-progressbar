@@ -171,10 +171,6 @@ local function StartProgress(action, onStart, onTick, onFinish)
                     wasCancelled = true
                     break
                 end
-                if wasCancelled == true then
-                    wasCancelled = false
-                    break
-                end
             end
             if onFinish then onFinish(wasCancelled) end
             inprogress = false
